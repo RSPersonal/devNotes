@@ -1,0 +1,19 @@
+Notes regarding running python scripts with cronjobs
+
+To run python scripts via cronjob we need to activate the environment first for possible depencies.
+We can do this by specifying the usage of bash script in the cronjob. We need to add the line "SHELL=/bin/bash" in the crontab file. 
+
+
+We also need to pay attention when creating the python environment. Do not use the "sudo" command. This will treat the file location by root, thus installing in the global environment instead of the newly created environment.
+
+This is also the case for installing packages via pip, after activating the new environment, only use "pip install <package>" and do not use sudo command.
+
+
+Eample for activating the environment in the cronjob:
+"source /path/to/environment/file/env/bin/activate"
+
+Example for running main.py script in the cronjob:
+"python3 /path/to/dir/main.py"
+
+Example for logging the script output to logs:
+">> /path/to/logging/dir/example.log 2<&1"
